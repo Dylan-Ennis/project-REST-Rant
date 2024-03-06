@@ -2,6 +2,10 @@ const router = require("express").Router();
 const express = require("express");
 const app = express();
 
+app.get("/new", (req, res) => {
+  res.render("\places/new");
+});
+
 app.get("/", (req, res) => {
   let places = [
     {
@@ -25,5 +29,6 @@ app.get("/", (req, res) => {
   ];
   res.render("places/index", { places });
 });
+// app.use('/places', router);
 
 module.exports = app;
