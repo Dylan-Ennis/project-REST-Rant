@@ -6,3 +6,12 @@ h1 {
     text-align: center;
     color: cornflowerblue;
   }
+
+  .form-group {
+   margin: auto;
+   padding: 10px;
+   max-width: 500px;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+  }

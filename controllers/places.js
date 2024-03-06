@@ -2,14 +2,22 @@ const router = require("express").Router();
 const express = require("express");
 const app = express();
 
-app.get("/new", (req, res) => {
+router.get("/new", (req, res) => {
   res.render("\places/new");
 });
+// or switching new.jsx to views foler and removing the \places or \places/ works as well (try both)
 
-app.get("/", (req, res) => {
+router.get("/new", (req, res) => {
+  res.render("places/new");
+});
+
+// create
+
+
+router.get("/", (req, res) => {
   let places = [
     {
-      id: "1",
+      // id: "1",
       name: "H-Thai-ML",
       city: "Seattle",
       state: "WA",
@@ -18,7 +26,7 @@ app.get("/", (req, res) => {
       // Photo by <a href="https://unsplash.com/@shawnanggg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">shawnanggg</a> on <a href="https://unsplash.com/photos/brown-and-gray-concrete-store-nmpW_WwwVSc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
     },
     {
-      id: "2",
+      // id: "2",
       name: "Coding Cat Cafe",
       city: "Phoenix",
       state: "AZ",
@@ -28,7 +36,12 @@ app.get("/", (req, res) => {
     },
   ];
   res.render("places/index", { places });
-});
-// app.use('/places', router);
 
-module.exports = app;
+  router.post("/", (req, res) => {
+  places.push(req.body)
+  res.redirect('places')
+})
+});
+router.use('/places', router);
+
+module.exports = router;
