@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 router.get("/new", (req, res) => {
-  res.render("\places/new");
+  res.render("places/new");
 });
 // or switching new.jsx to views foler and removing the \places or \places/ works as well (try both)
 
@@ -12,7 +12,6 @@ router.get("/new", (req, res) => {
 });
 
 // create
-
 
 router.get("/", (req, res) => {
   let places = [
@@ -36,12 +35,14 @@ router.get("/", (req, res) => {
     },
   ];
   res.render("places/index", { places });
+  });
 
   router.post("/", (req, res) => {
-  places.push(req.body)
-  res.redirect('places')
-})
-});
-router.use('/places', router);
+    console.log(req.body);
+    res.send("POST /places");
+  });
+
+
+router.use("/places", router);
 
 module.exports = router;

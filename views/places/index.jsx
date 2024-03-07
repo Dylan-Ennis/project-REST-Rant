@@ -1,5 +1,7 @@
 const React = require("react");
 const Def = require("../default");
+const express = require("express");
+const app = express();
 
 function index(data) {
   let placesFormatted = data.places.map((place) => {
@@ -23,6 +25,7 @@ function index(data) {
     </Def>
   );
 }
+
 
 module.exports = index;
 
