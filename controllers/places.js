@@ -1,6 +1,13 @@
 const router = require("express").Router();
 const express = require("express");
-const app = express();
+const places = require('../models/places.js')
+
+router.get('/', (req, res) => {
+    res.render('places/index', { places })
+})
+
+// More code ...
+
 
 router.get("/new", (req, res) => {
   res.render("places/new");
@@ -13,36 +20,27 @@ router.get("/new", (req, res) => {
 
 // create
 
-router.get("/", (req, res) => {
-  let places = [
-    {
-      // id: "1",
-      name: "H-Thai-ML",
-      city: "Seattle",
-      state: "WA",
-      cuisines: "Thai, Pan-Asian",
-      pic: "/images/shawnanggg-nmpW_WwwVSc-unsplash.jpg",
-      // Photo by <a href="https://unsplash.com/@shawnanggg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">shawnanggg</a> on <a href="https://unsplash.com/photos/brown-and-gray-concrete-store-nmpW_WwwVSc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-    },
-    {
-      // id: "2",
-      name: "Coding Cat Cafe",
-      city: "Phoenix",
-      state: "AZ",
-      cuisines: "Coffee, Bakery",
-      pic: "/images/volkan-vardar-1H30uRC1plc-unsplash.jpg",
-      //Photo by <a href="https://unsplash.com/@vardarious?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Volkan Vardar</a> on <a href="https://unsplash.com/photos/people-sitting-on-chairs-inside-restaurant-1H30uRC1plc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-    },
-  ];
-  res.render("places/index", { places });
-  });
 
-  router.post("/", (req, res) => {
-    console.log(req.body);
-    res.send("POST /places");
-  });
+
+router.post('/', (req, res) => {
+  console.log(req.body)
+  if (!req.body.pic) {
+    // Default image if one is not provided
+    req.body.pic = 'http://placekitten.com/400/400'
+  }
+  if (!req.body.city) {
+    req.body.city = 'Anytown'
+  }
+  if (!req.body.state) {
+    req.body.state = 'USA'
+  }
+  places.push(req.body)
+  res.redirect('/places')
+})
+
 
 
 router.use("/places", router);
 
 module.exports = router;
+
