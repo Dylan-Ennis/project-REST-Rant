@@ -4,16 +4,26 @@ const express = require("express");
 const app = express();
 
 function index(data) {
-  let placesFormatted = data.places.map((place) => {
+  let placesFormatted = data.places.map((place, index) => {
     return (
       <div key={place.id} className="col-sm-6 text-center">
-          <h2>{place.name}</h2>
-          <p className="text-center">{place.cuisines}</p>
-          <img src={place.pic} alt={place.name} height="200px" width="200px" className="mx-auto d-block" />
-          <p className="text-center">
-            Located in {place.city}, {place.state}
-          </p>
-        </div>
+        <h2>
+          <a href={`/places/${index}`} >
+            {place.name}
+          </a>
+        </h2>
+        <p className="text-center">{place.cuisines}</p>
+        <img
+          src={place.pic}
+          alt={place.name}
+          height="200px"
+          width="200px"
+          className="mx-auto d-block"
+        />
+        <p className="text-center">
+          Located in {place.city}, {place.state}
+        </p>
+      </div>
     );
   });
   return (
@@ -26,6 +36,4 @@ function index(data) {
   );
 }
 
-
 module.exports = index;
-
