@@ -3,6 +3,9 @@ h1 {
     text-align: center;
     color: cornflowerblue;
   }
+  h2 {
+   color: lightblue;
+  }
   body {
    background-color: lightblue;
    text-align: center;
