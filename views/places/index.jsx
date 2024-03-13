@@ -8,7 +8,7 @@ function index(data) {
     return (
       <div key={place.id} className="col-sm-6 text-center">
         <h2>
-          <a href={`/places/${index}`} >
+          <a href={`/places/${place.id}`} >
             {place.name}
           </a>
         </h2>
