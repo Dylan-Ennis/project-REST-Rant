@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 const placeSchema = new mongoose.Schema({
   name: { type: String, required: true },
