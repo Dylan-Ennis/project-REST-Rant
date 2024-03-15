@@ -5,25 +5,25 @@ function show(data) {
   return (
     <Def>
       <main>
+        <div className="row">
+          <div className="col-sm-6">
+            <div>
+              <img src={data.place.pic} alt={data.place.name}></img>
+              <h3>
+                Located in {data.place.city}, {data.place.state}
+              </h3>
+            </div>
+          </div>
+        </div>
         <div>
           <h1>{data.place.name}</h1>
-        </div>
-        <div>
-          <img src={data.place.pic} alt="Restaurant Picture"></img>
-        </div>
-        <div>
-          <h1>{data.place.city}</h1>
-        </div>
-        <div>
-          <h1>{data.place.state}</h1>
-        </div>
-        <div>
-          <h1>{data.place.cuisines}</h1>
         </div>
         <div>
           <h2>Rating</h2>
           <h5>Not Rated</h5>
         </div>
+        <h3>{data.place.showEstablished()}</h3>
+        <h4>Serving {data.place.cuisines}</h4>
         <div>
           <h2>Comments</h2>
           <h5>No comments yet!</h5>
