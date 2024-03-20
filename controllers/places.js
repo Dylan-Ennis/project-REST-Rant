@@ -58,7 +58,7 @@ router.post('/:id/comment', (req, res) => {
   if (req.body.rant) {
     req.body.rant = true}
     else {
-      req.bodu.rant = false
+      req.body.rant = false
     }
   db.Place.findById(req.params.id)
   .then(place => {
