@@ -63,8 +63,6 @@ router.delete('/:id', (req, res) => {
   })
 })
 
-
-
 router.get('/:id/edit', (req, res) => {
   db.Place.findById(req.params.id)
   .then(place => {
@@ -74,8 +72,6 @@ router.get('/:id/edit', (req, res) => {
       res.render('error404')
   })
 })
-
-
 
 router.post('/:id/comment', (req, res) => {
   console.log(req.body)
@@ -97,9 +93,55 @@ router.post('/:id/comment', (req, res) => {
       })
   })
 
+  // router.delete(`/:id/comment`, (req, res) => {
+  //   console.log('hello1')
+  //   db.Place.findByIdAndDelete(req.params._id)
+  //   .then(place => {
+  //     res.redirect(`/places/${req.params.id}`)
+  //   })
+  //   .catch(err => {
+  //     console.log('err', err)
+  //       res.render('error404')
+  //   })
+  // })
 
-
-
+  router.delete('/:id/comment/:commentId', async (req, res) => {
+    try {
+      // Find the place by ID
+      const place = await db.Place.findById(req.params.id);
+  
+      if (!place) {
+        return res.status(404).render('error404');
+      }
+  
+      // Log the comments array and the comment ID
+      console.log('Comments:', place.comments);
+      console.log('Comment ID:', req.params.commentId);
+  
+      // Find the index of the comment to remove
+      const commentIndex = place.comments.findIndex(comment => comment._id.toString() === req.params.commentId);
+  
+      console.log('Comment Index:', commentIndex);
+  
+      if (commentIndex === -1) {
+        // If comment not found, return error
+        return res.status(404).render('error404');
+      }
+  
+      // Remove the comment from the array
+      place.comments.splice(commentIndex, 1);
+  
+      // Save the updated place
+      await place.save();
+  
+      // Redirect back to the place page
+      res.redirect(`/places/${req.params.id}`);
+    } catch (err) {
+      console.error('Error:', err);
+      res.status(500).render('error500');
+    }
+  });
+  
 
 
 router.post("/:id/rant", (req, res) => {
